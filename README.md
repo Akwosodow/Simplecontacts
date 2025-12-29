@@ -8,4 +8,4 @@ Just run the app.py file and inspect the plethora of options avalible to you at 
 
 Realistically since the functions are already there one could easily edit the python file to make things work if I haven't updated it yet.
 
-Additionally an example CSV file has een provided since adding contacts isn't implemented yet
+Additionally an example CSV file has been provided since adding contacts isn't implemented yet
