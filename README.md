@@ -2,7 +2,7 @@
 A (currently) very shitty contact book that is worse than just  editing a CSV file yourself
 
 
-#to use
+## to use
 
 Just run the app.py file and inspect the plethora of options avalible to you at the current moment (half don't work and none of them have error handling).
 
