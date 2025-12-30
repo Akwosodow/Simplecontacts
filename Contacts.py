@@ -1,6 +1,6 @@
 
 def del_Contact(idx: int, conlist=[]) -> "removes contact from list":
-    conlist[idx]=None
+    conlist.pop(idx)
     return(conlist)
 
 def add_contact(cont: list, conlist=[]) -> list:
@@ -43,14 +43,14 @@ def sort_contacts(contactlist=[], sortby=False):
     mid = len(contactlist)//2
     if mid==0:
         return(contactlist)
-    return(merge(sort_contacts(contactlist[:mid]), sort_contacts(contactlist[mid:]), sortby))
+    return(merge(sort_contacts(contactlist[:mid], sortby), sort_contacts(contactlist[mid:], sortby), sortby))
 
 def merge(left, right, sortby):
-    i, j = 0, 0
-    index = 0
+    i, j, index = 0, 0, 0
     orgsortby = sortby
     swapped=False
     merged=[]
+
     while i<len(left) and j<len(right):
         try:
             if left[i][sortby][index]==right[j][sortby][index]:
@@ -66,10 +66,10 @@ def merge(left, right, sortby):
                 index=0
                 sortby=orgsortby
         except IndexError:
-            if len(left[i][sortby])>index:
+            if len(left[i][sortby])>index+1:
                 merged.append(right[j])
                 j+=1
-            elif len(right[j][sortby])>index:
+            elif len(right[j][sortby])>index+1:
                 merged.append(left[i])
                 i+=1
             elif swapped==True:

@@ -2,9 +2,39 @@ import os
 import Contacts
 
 contactlist=[]
+
+def userinp():
+    try:
+        userinput=int(input("Select Option: "))
+    except ValueError:
+        userinput=0
+    return(userinput)
+
 def view_page(contactlist):
-    print(contactlist)
-    input("press enter to exit")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("""
+    Contacts: 
+    """)
+    for con in contactlist:
+        print(con)
+    print("""
+    
+    Sort options:
+    Firstname            [1]
+    Lastname             [2]
+
+    Exit                 [3]
+    """)
+
+    match userinp():
+        case 1:
+            contactlist=Contacts.sort_contacts(contactlist, False)
+        case 2:
+            contactlist=Contacts.sort_contacts(contactlist, True)
+        case 3:
+            return(0)
+    
+    view_page(contactlist)
 
 def exitconf(contactlist):
     userinput=0
@@ -18,12 +48,7 @@ def exitconf(contactlist):
 
     """)
 
-    try:
-        userinput=int(input("Select Option: "))
-    except ValueError:
-        userinput=0
-
-    match userinput:
+    match userinp():
         case 1:
             Contacts.save_contacts(contactlist)
             return(0)
@@ -40,7 +65,7 @@ def app(contactlist: list):
     View contacts        [1]
     Save contacts        [2]
     Load contacts        [3]
-    sort contacts        [4]
+    Sort contacts        [4]
 
     New Contact          [5]
     Delete contact       [6]
@@ -48,12 +73,8 @@ def app(contactlist: list):
     Exit                 [7]
 
     """)
-    try:
-        userinput=int(input("Select Option: "))
-    except ValueError:
-        userinput=0
     
-    match userinput:
+    match userinp():
         case 1:
             view_page(contactlist)
         case 2:
@@ -73,5 +94,4 @@ def app(contactlist: list):
             return(exitconf(contactlist))
 
     app(contactlist)
-
 app(contactlist)
