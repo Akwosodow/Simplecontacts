@@ -1,6 +1,6 @@
 
-def del_Contact(idx: int, conlist=[]) -> "removes contact from list":
-    conlist[idx]=None
+def del_Contact(idx: int, conlist: list) -> "removes contact from list":
+    conlist.pop(idx)
     return(conlist)
 
 def add_contact(cont: list, conlist=[]) -> list:
@@ -14,7 +14,14 @@ def add_contact(cont: list, conlist=[]) -> list:
     conlist.append(cont)
     return(conlist)
 
-def save_contacts(conlist=[], name = "Contacts.csv") -> "saves as file":
+def edit_contact(conidx: int, editidx: int, edit: str, conlist=[]):
+    """
+    Takes a specified location in a contact and changes it to a passed string
+    """
+    conlist[conidx][editidx]=edit
+    return(conlist)
+
+def save_contacts(conlist: list, name = "Contacts.csv") -> "saves as file":
     """
     Takes in a contact list and outputs a comma seperated values file with one contact per line
     """
@@ -35,22 +42,22 @@ def load_contacts(name = "Contacts.csv") -> "loads a contact file":
             final[i]=con.split(",")
         return(final)
 
-def sort_contacts(contactlist=[], sortby=False):
+def sort_contacts(conlist: list, sortby=False):
     """
     Sorts the given contact list using merge sort
     The sortby value defines whether the list is sorted by first or last name (0, 1 respectively)
     """
-    mid = len(contactlist)//2
+    mid = len(conlist)//2
     if mid==0:
-        return(contactlist)
-    return(merge(sort_contacts(contactlist[:mid]), sort_contacts(contactlist[mid:]), sortby))
+        return(conlist)
+    return(merge(sort_contacts(conlist[:mid], sortby), sort_contacts(conlist[mid:], sortby), sortby))
 
 def merge(left, right, sortby):
-    i, j = 0, 0
-    index = 0
+    i, j, index = 0, 0, 0
     orgsortby = sortby
     swapped=False
     merged=[]
+
     while i<len(left) and j<len(right):
         try:
             if left[i][sortby][index]==right[j][sortby][index]:
@@ -66,10 +73,10 @@ def merge(left, right, sortby):
                 index=0
                 sortby=orgsortby
         except IndexError:
-            if len(left[i][sortby])>index:
+            if len(left[i][sortby])>index+1:
                 merged.append(right[j])
                 j+=1
-            elif len(right[j][sortby])>index:
+            elif len(right[j][sortby])>index+1:
                 merged.append(left[i])
                 i+=1
             elif swapped==True:
