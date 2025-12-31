@@ -96,9 +96,6 @@ def edit_page(contactlist):
 
     return(contactlist)
 
-
-    return(contactlist)
-
 def exitconf(contactlist):
     userinput=0
     os.system('cls' if os.name == 'nt' else 'clear')
