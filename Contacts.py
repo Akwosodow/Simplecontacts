@@ -7,12 +7,7 @@ def add_contact(cont: list, conlist=[]) -> list:
     """
     Takes in an array with contact information and adds it to the specified contact list
     """
-    for i, con in enumerate(conlist):
-        if type(conlist[i])!=list:
-            conlist[i]=cont
-            return(conlist)
-    conlist.append(cont)
-    return(conlist)
+    return(conlist.append(cont))
 
 def edit_contact(conidx: int, editidx: int, edit: str, conlist=[]):
     """
